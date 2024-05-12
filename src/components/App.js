@@ -3,21 +3,28 @@ import { counterReducer } from '../reducers/counterReducer';
 import '../styles/App.css';
 
 const App = () => {
+  const initialState = { count: 0 };
+  const [state, dispatch] = useReducer(counterReducer, initialState);
 
-  const initialState = 0;
+  const handleIncrement = () => {
+    dispatch({ type: 'INCREMENT' });
+  };
 
-const [state,dispatch] = useReducer(counterReducer,initialState)
+  const handleDecrement = () => {
+    dispatch({ type: 'DECREMENT' });
+  };
 
   return (
-    <div id="main" style={{display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
-      <span id='counter'>{state}</span>
-      <div>
-      <button id='increment-btn' onClick={() => dispatch({type: "Increment"})}>Increment</button>
-      <button id='decrement-btn' onClick={() => dispatch({type: "Decrement"})}>Decrement</button>
-      </div>
+    <div id="main">
+      <span id="counter">{state.count}</span>
+      <button id="increment-btn" onClick={handleIncrement}>
+        Increment
+      </button>
+      <button id="decrement-btn" onClick={handleDecrement}>
+        Decrement
+      </button>
     </div>
-  )
-}
-
+  );
+};
 
 export default App;
